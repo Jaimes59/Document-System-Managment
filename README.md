@@ -1,6 +1,6 @@
 # Document-System-Managment
 
-##Integrantes
+## Integrantes
 - Diego Jaimes
 - Victor Rivera
 - Jesus Puello
