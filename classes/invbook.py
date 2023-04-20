@@ -38,7 +38,7 @@ class InvBook(Edoc):
         :param abstract: the abstract of the InvBook
         :type abstract: str
         """
-        super().__init__(id_doc, author, title, price, topic, language, pub_date, size, doi, pages, abstract)
+        super().__init__(id_doc, author, title, price, topic, language, pub_date, size, doi)
         self.__pages = pages
         self.__abstract = abstract
 

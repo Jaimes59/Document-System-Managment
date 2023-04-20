@@ -2,14 +2,15 @@ from classes.delivery import Delivery
 from classes.person import Person
 from classes.address import Address
 
+
 class FDelivery(Delivery):
     """
     Class that represents a delivery
     """
 
     def __init__(self, buyer: Person = Person(), deliver_id: int = 0,
-                date: str = 'date', address: Address = Address(),
-                contact: Person = Person(), company: str = 'company') -> object:
+                 date: str = 'date', address: Address = Address(),
+                 contact: Person = Person(), company: str = 'company') -> object:
         """
         Constructor of the class
         :param buyer: the buyer of the delivery

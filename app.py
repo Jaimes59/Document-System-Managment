@@ -29,20 +29,17 @@ from classes.book_controller import BookController
 from classes.client_controller import ClientController
 from classes.delivery_controller import DeliveryController
 from classes.document_controller import DocumentController
-
-"""
-
-from classes.ebook_controller import EbookController
-from classes.edelivery_controller import EDeliveryController
+from classes.ebook_controller import EBookController
+from classes.edelivery_controller import EdeliveryController
 from classes.edoc_controller import EdocController
-from classes.fdelivery_controller import FDeliveryController
+from classes.fdelivery_controller import FdeliveryController
 from classes.fdoc_controller import FdocController
-from classes.invbook_controller import InvBookController
+from classes.invbook_controller import InvbookController
 from classes.lease_controller import LeaseController
 from classes.magazine_controller import MagazineController
 from classes.person_controller import PersonController
 from classes.sell_controller import SellController
-"""
+
 
 app = FastAPI()
 address_object = AddressController()
@@ -52,19 +49,17 @@ book_object = BookController()
 client_object = ClientController()
 delivery_object = DeliveryController()
 document_object = DocumentController()
-
-"""
-ebook_object = EbookController()
-edelivery_object = EDeliveryController()
+ebook_object = EBookController()
+edelivery_object = EdeliveryController()
 edoc_object = EdocController()
-fdelivery_object = FDeliveryController()
+fdelivery_object = FdeliveryController()
 fdoc_object = FdocController()
-invbook_object = InvBookController()
+invbook_object = InvbookController()
 lease_object = LeaseController()
 magazine_object = MagazineController()
 person_object = PersonController()
 sell_object = SellController()
-"""
+
 
 origins = ["*"]
 
@@ -80,17 +75,6 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"200": "Welcome To Document Management System Restful API"}
-
-
-@app.get("/api/document")
-async def root():
-    return document_object.show()
-
-
-@app.post("/api/document")
-async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str):
-    return document_object.add(Document(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
-                                        language=language))
 
 
 @app.get("/api/address")
@@ -161,6 +145,128 @@ async def root():
 async def add(buyer: str, delivery_id: int, date: str):
     return delivery_object.add(Delivery(buyer=buyer, deliver_id=delivery_id, date=date))
 
+
+@app.get("/api/document")
+async def root():
+    return document_object.show()
+
+
+@app.post("/api/document")
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str):
+    return document_object.add(Document(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
+                                        language=language))
+
+
+@app.get("/api/ebook")
+async def root():
+    return ebook_object.show()
+
+
+@app.post("/api/ebook")
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pub_date: str,
+              size: float, doi: str, editor: str, pages: int, synopsis: str):
+    return ebook_object.add(Ebook(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
+                                  language=language,pub_date=pub_date, size=size, doi=doi, editor=editor,
+                                  pages=pages, synopsis=synopsis))
+
+
+@app.get("/api/edelivery")
+async def root():
+    return edelivery_object.show()
+
+
+@app.post("/api/edelivery")
+async def add(buyer: str, delivery_id: int, date: str, deliver_mail: str):
+    return edelivery_object.add(EDelivery(buyer=buyer, deliver_id=delivery_id, date=date, deliver_mail=deliver_mail))
+
+
+@app.get("/api/edoc")
+async def root():
+    return edoc_object.show()
+
+
+@app.post("/api/edoc")
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pub_date: str,
+              size: float, doi: str):
+    return edoc_object.add(Edoc(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
+                                language=language,pub_date=pub_date, size=size, doi=doi))
+
+
+@app.get("/api/fdelivery")
+async def root():
+    return fdelivery_object.show()
+
+
+@app.post("/api/fdelivery")
+async def add(buyer: str, delivery_id: int, date: str, address: str, contact: str, company: str):
+    return fdelivery_object.add(FDelivery(buyer=buyer, deliver_id=delivery_id, date=date, address=address,
+                                          contact=contact, company=company))
+
+
+@app.get("/api/fdoc")
+async def root():
+    return fdoc_object.show()
+
+
+@app.post("/api/fdoc")
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, publisher: str):
+    return fdoc_object.add(Fdoc(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
+                                language=language, publisher=publisher))
+
+
+@app.get("/api/invbook")
+async def root():
+    return invbook_object.show()
+
+
+@app.post("/api/invbook")
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pages: int, abstract: str):
+    return invbook_object.add(InvBook(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
+                                      language=language, pages=pages, abstract=abstract))
+
+
+@app.get("/api/lease")
+async def root():
+    return lease_object.show()
+
+
+@app.post("/api/lease")
+async def add(lease_id: int, start_date: str, finish_date: str, pay_method: str,total_price: float, items: list):
+    return lease_object.add(Lease(lease_id=lease_id, start_date=start_date, finish_date=finish_date,
+                                  pay_method=pay_method, total_price=total_price, items=items))
+
+
+@app.get("/api/magazine")
+async def root():
+    return magazine_object.show()
+
+
+@app.post("/api/magazine")
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pub_date: str,
+              size: float, doi: str, edition: int, pages: int):
+    return magazine_object.add(Magazine(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
+                                        language=language,pub_date=pub_date, size=size, doi=doi, edition=edition,
+                                        pages=pages))
+
+
+@app.get("/api/person")
+async def root():
+    return person_object.show()
+
+
+@app.post("/api/person")
+async def add(id_person: int, name: str, last_name: str, phone: str, mail: str):
+    return person_object.add(Person(id_person=id_person, name=name, last_name=last_name, phone=phone, mail=mail))
+
+
+@app.get("/api/sell")
+async def root():
+    return sell_object.show()
+
+
+@app.post("/api/sell")
+async def add(sell_id: int, date: str, pay_method: str, total_price: float, items: list):
+    return sell_object.add(Sell(sell_id=sell_id, date=date, pay_method=pay_method, total_price=total_price, items=items))
 
 if __name__ == "__main__":
     uvicorn.run(app, port=33508)

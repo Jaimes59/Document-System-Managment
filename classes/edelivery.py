@@ -1,5 +1,8 @@
+from typing import Dict
+
 from classes.delivery import Delivery
 from classes.person import Person
+
 
 class EDelivery(Delivery):
     """
@@ -7,7 +10,7 @@ class EDelivery(Delivery):
     """
 
     def __init__(self, buyer: Person = Person(), deliver_id: int = 0,
-                date: str = 'date', deliverMail: str = 'deliverMail') -> object:
+                 date: str = 'date', deliver_mail: str = 'deliverMail') -> object:
         """
         Constructor of the class
         :param buyer: the buyer of the delivery
@@ -16,29 +19,29 @@ class EDelivery(Delivery):
         :type deliver_id: int
         :param date: the date of the delivery
         :type date: str
-        :param deliverMail: the email of the delivery
-        :type deliverMail: str
+        :param deliver_mail: the email of the delivery
+        :type deliver_mail: str
         """
         super().__init__(buyer, deliver_id, date)
-        self.__deliverMail = deliverMail
+        self.__deliver_mail = deliver_mail
     
     @property
-    def deliverMail(self) -> str:
+    def deliver_mail(self) -> str:
         """
         Getter of the email
         :return: the email of the delivery
         :rtype: str
         """
-        return self.__deliverMail
+        return self.__deliver_mail
     
-    @deliverMail.setter
-    def deliverMail(self, deliverMail: str) -> None:
+    @deliver_mail.setter
+    def deliver_mail(self, deliver_mail: str) -> None:
         """
         Setter of the email
-        :param deliverMail: the email of the delivery
-        :type deliverMail: str
+        :param deliver_mail: the email of the delivery
+        :type deliver_mail: str
         """
-        self.__deliverMail = deliverMail
+        self.__deliver_mail = deliver_mail
 
     def sendDocument(self) -> None:
         """
@@ -46,7 +49,7 @@ class EDelivery(Delivery):
         """
         print('Sending document by email...')
 
-    def __str__(self) -> str:
+    def __str__(self) -> dict[str, str | int]:
         """
         Method that returns the string representation of the object
         :return: the string representation of the object
@@ -54,7 +57,7 @@ class EDelivery(Delivery):
         """
         return {"ID": self.deliver_id,
                 "Date": self.date,
-                "Email": self.deliverMail}
+                "Email": self.deliver_mail}
 
     def __eq__(self, other: object) -> bool:
         """

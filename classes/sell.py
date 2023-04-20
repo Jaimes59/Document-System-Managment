@@ -1,5 +1,6 @@
 from classes.document import Document
 
+
 class Sell(object):
     """
     A class that represents a sell
