@@ -104,8 +104,16 @@ class Edoc(Document):
         :return: the string representation of the object
         :rtype: str
         """
-        return f"Id: {self.id}, Author: {self.author}, Title: {self.title}, Price: {self.price}, Topic: {self.topic}, Language: {self.language}, Publication Date: {self.pub_date}, Size: {self.size}, DOI: {self.doi}"
-    
+        return {"ID": self.id_doc,
+                "Author": self.author,
+                "Title": self.title,
+                "Price": self.price,
+                "Topic": self.topic,
+                "Language": self.language,
+                "Publication Date": self.pub_date,
+                "Size": self.size,
+                "DOI": self.doi}
+
     def __eq__(self, other: object) -> bool:
         """
         Method that returns True if the object is equal to other

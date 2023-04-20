@@ -79,8 +79,10 @@ class Delivery (object):
         :return: the string representation of the object
         :rtype: str
         """
-        return f'Delivery: {self.deliver_id}, {self.date}, {self.buyer}'
-    
+        return {"ID": self.deliver_id,
+                "Date": self.date,
+                "Buyer": self.buyer}
+
     def __eq__(self, other: object) -> bool:
         """
         Method that compares two objects

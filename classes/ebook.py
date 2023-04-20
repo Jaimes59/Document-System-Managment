@@ -4,15 +4,15 @@ class Ebook(Edoc):
     """
     A class that represents an electronic book
     """
-    def __init__(self, id: int = 0, author: str = 'author',
-                title: str = 'title', price: float = 0.1,
-                topic: str = 'topic', language: str = 'esp',
-                pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
-                editor: str = 'editor', pages: int = 1, synopsis: str = 'synopsis') -> object:
+    def __init__(self, id_doc: int = 0, author: str = 'author',
+                 title: str = 'title', price: float = 0.1,
+                 topic: str = 'topic', language: str = 'esp',
+                 pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
+                 editor: str = 'editor', pages: int = 1, synopsis: str = 'synopsis') -> object:
         """
         Constructor of the class
-        :param id: the id of the electronic book
-        :type id: int
+        :param id_doc: the id of the electronic book
+        :type id_doc: int
         :param author: the author of the electronic book
         :type author: str
         :param title: the title of the electronic book
@@ -36,7 +36,7 @@ class Ebook(Edoc):
         :param synopsis: the synopsis of the electronic book
         :type synopsis: str
         """
-        super().__init__(id, author, title, price, topic, language, pub_date, size, doi)
+        super().__init__(id_doc, author, title, price, topic, language, pub_date, size, doi)
         self.__editor = editor
         self.__pages = pages
         self.__synopsis = synopsis
@@ -101,8 +101,16 @@ class Ebook(Edoc):
         :return: the string to print
         :rtype: str
         """
-        return 'Ebook: ' + super().__str__() + ', editor: ' + self.__editor + ', pages: ' + str(self.__pages) + ', synopsis: ' + self.__synopsis
-    
+        return {"ID": self.id_doc,
+                "Author": self.author,
+                "Title": self.title,
+                "Price": self.price,
+                "Topic": self.topic,
+                "Language": self.language,
+                "Editor": self.editor,
+                "Pages": self.pages,
+                "Synopsis": self.synopsis}
+
     def __eq__(self, other: object) -> bool:
         """
         Method to compare two objects

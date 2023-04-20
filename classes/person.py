@@ -3,13 +3,13 @@ class Person (object):
     A class that represents a person
     """
 
-    def __init__(self, id: int = 0, name: str = 'name', 
-                last_name: str = 'last_name', phone: str = 'phone',
-                mail: str = 'mail') -> object:
+    def __init__(self, id_person: int = 0, name: str = 'name',
+                 last_name: str = 'last_name', phone: str = 'phone',
+                 mail: str = 'mail') -> object:
         """
         Constructor of the class
-        :param id: the id of the person
-        :type id: int
+        :param id_person: the id of the person
+        :type id_person: int
         :param name: the name of the person
         :type name: str
         :param last_name: the last name of the person
@@ -19,29 +19,29 @@ class Person (object):
         :param mail: the mail of the person
         :type mail: str
         """
-        self.__id = id
+        self.__id_person = id_person
         self.__name = name
         self.__last_name = last_name
         self.__phone = phone
         self.__mail = mail
     
     @property
-    def id(self) -> int:
+    def id_person(self) -> int:
         """
         Getter of the id
         :return: the id of the person
         :rtype: int
         """
-        return self.__id
+        return self.__id_person
     
-    @id.setter
-    def id(self, id: int) -> None:
+    @id_person.setter
+    def id_person(self, id_person: int) -> None:
         """
         Setter of the id
-        :param id: the id of the person
-        :type id: int
+        :param id_person: the id of the person
+        :type id_person: int
         """
-        self.__id = id
+        self.id_person = id_person
     
     @property
     def name(self) -> str:
@@ -121,8 +121,12 @@ class Person (object):
         :return: the string representation of the object
         :rtype: str
         """
-        return f'Person: {self.id}, {self.name}, {self.last_name}, {self.phone}, {self.mail}'
-    
+        return {"Person": self.id_person,
+                "Name": self.name,
+                "Last Name": self.last_name,
+                "Phone": self.phone,
+                "Mail": self.mail}
+
     def __eq__(self, other: object) -> bool:
         """
         Method that returns if two objects are equal
@@ -132,7 +136,7 @@ class Person (object):
         :rtype: bool
         """
         if isinstance(other, Person):
-            return (self.id == other.id and self.name == other.name and
+            return (self.id_person == other.id_person and self.name == other.name and
                     self.last_name == other.last_name and 
                     self.phone == other.phone and self.mail == other.mail)
         return False

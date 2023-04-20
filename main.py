@@ -34,21 +34,21 @@ if __name__ == "__main__":
 
 
     # Create a new client
-    client1 = Client(id=1, name='Gerardo', last_name='Iglesias',
+    client1 = Client(id_person=1, name='Gerardo', last_name='Iglesias',
                      phone='+573127485294', mail='gerardoigelsias@gmail.com')
-    client2 = Client(id=2, name='Sofia', last_name='Rodriguez',
+    client2 = Client(id_person=2, name='Sofia', last_name='Rodriguez',
                      phone='+5712345678', mail='sofiarodriguez@hotmail.com')
-    client3 = Client(id=3, name='Juan', last_name='Gonzales',
+    client3 = Client(id_person=3, name='Juan', last_name='Gonzales',
                      phone='+573127437294', mail='juangonzales@gmail.com')
 
     #Create a new administrator
-    administrator1 = Administrator(id=1, name='Adrian', last_name='Gonzales',
+    administrator1 = Administrator(id_person=1, name='Adrian', last_name='Gonzales',
                                    phone='+573127437294', mail='adriangonzales@gmail.com')
-    administrator2 = Administrator(id=2, name='Ana', last_name='González',
+    administrator2 = Administrator(id_person=2, name='Ana', last_name='González',
                                    phone='+573012345678', mail='anagonzalez@gmail.com')
-    administrator3 = Administrator(id=3, name='Pablo', last_name='Rodriguez',
+    administrator3 = Administrator(id_person=3, name='Pablo', last_name='Rodriguez',
                                    phone='+5712345678', mail='pablo.rodriguez@hotmail.com')
-    administrator4 = Administrator(id=4, name='María', last_name='García',
+    administrator4 = Administrator(id_person=4, name='María', last_name='García',
                                    phone='+573012345678', mail='mariagarcia@yahoo.com')
 
     #Create a new dms

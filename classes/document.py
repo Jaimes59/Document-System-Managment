@@ -2,48 +2,49 @@ class Document(object):
     """
     A class that represents a document
     """
-    def __init__(self, id: int = 0, author: str = 'author',
-                title: str = 'title', price: float = 0.1,
-                topic: str = 'topic', language: str = 'esp') -> object:
+
+    def __init__(self, id_doc: int = 0, author: str = 'author',
+                 title: str = 'title', price: float = 0.1,
+                 topic: str = 'topic', language: str = 'esp') -> object:
         """
         Constructor of the class
-        :param id: the id of the document
-        :type id: int
+        :param id_doc: the id of the document
+        :type id_doc: int
         :param author: the author of the document
         :type author: str
         :param title: the title of the document
         :type title: str
         :param price: the price of the document
         :type price: float
-        :param topi: the topic of the document
-        :type topi: str
+        :param topic: the topic of the document
+        :type topic: str
         :param language: the language of the document
         :type language: str
         """
-        self.__id = id
+        self.__id_doc = id_doc
         self.__author = author
         self.__title = title
         self.__price = price
         self.__topic = topic
         self.__language = language
-    
+
     @property
-    def id(self) -> int:
+    def id_doc(self) -> int:
         """
-        Getter of the id
-        :return: the id of the document
+        Getter of the id_doc
+        :return: the id_doc of the document
         :rtype: int
         """
-        return self.__id
-    
-    @id.setter
-    def id(self, id: int) -> None:
+        return self.__id_doc
+
+    @id_doc.setter
+    def id_doc(self, id_doc: int) -> None:
         """
-        Setter of the id
-        :param id: the id of the document
-        :type id: int
+        Setter of the id_doc
+        :param id_doc: the id_doc of the document
+        :type id_doc: int
         """
-        self.__id = id
+        self.__id_doc = id_doc
 
     @property
     def author(self) -> str:
@@ -53,7 +54,7 @@ class Document(object):
         :rtype: str
         """
         return self.__author
-    
+
     @author.setter
     def author(self, author: str) -> None:
         """
@@ -71,7 +72,7 @@ class Document(object):
         :rtype: str
         """
         return self.__title
-    
+
     @title.setter
     def title(self, title: str) -> None:
         """
@@ -89,7 +90,7 @@ class Document(object):
         :rtype: float
         """
         return self.__price
-    
+
     @price.setter
     def price(self, price: float) -> None:
         """
@@ -107,7 +108,7 @@ class Document(object):
         :rtype: str
         """
         return self.__topic
-    
+
     @topic.setter
     def topic(self, topic: str) -> None:
         """
@@ -125,7 +126,7 @@ class Document(object):
         :rtype: str
         """
         return self.__language
-    
+
     @language.setter
     def language(self, language: str) -> None:
         """
@@ -134,7 +135,7 @@ class Document(object):
         :type language: str
         """
         self.__language = language
-    
+
     def buy(self, quantity: int) -> float:
         """
         Method that calculates the total price of a document
@@ -151,10 +152,10 @@ class Document(object):
         :return: the string representation of the object
         :rtype: str
         """
-        return (f'***Printing book {self.id} ***' 
-                f'\nId: {self.id} \nAuthor: {self.author} \nTitle: {self.title} '
-                f'\nPrice: {self.price}$ \nTopic: {self.topic} \nLanguage: {self.language}\n')
-    
+        return{"id": self.id_doc, "Author": self.author, "Title": self.title, "Price": self.price, "Topic": self.topic,
+               "Language": self.language}
+
+
     def __eq__(self, other: object) -> bool:
         """
         Method that compares two objects
@@ -164,5 +165,5 @@ class Document(object):
         :rtype: bool
         """
         if isinstance(other, Document):
-            return self.id == other.id and self.author == other.author and self.title == other.title and self.price == other.price and self.topic == other.topic and self.language == other.language
+            return self.id_doc == other.id_doc and self.author == other.author and self.title == other.title and self.price == other.price and self.topic == other.topic and self.language == other.language
         return False

@@ -1,11 +1,14 @@
+from pydantic import BaseModel
+
+
 class Address(object):
     """
     A class that represents an address
     """
 
     def __init__(self, country: str = 'country', department: str = 'department',
-                city: str = 'city', post_code: str = 'post_code', neighborhood: str = 'neighborhood',
-                street: str = 'str', complement: str = 'str') -> object:
+                 city: str = 'city', post_code: str = 'post_code', neighborhood: str = 'neighborhood',
+                 street: str = 'str', complement: str = 'str') -> object:
         """
         Constructor of the class
         :param country: the country of the address
@@ -30,7 +33,7 @@ class Address(object):
         self.__neighborhood = neighborhood
         self.__street = street
         self.__complement = complement
-    
+
     @property
     def country(self) -> str:
         """
@@ -39,7 +42,7 @@ class Address(object):
         :rtype: str
         """
         return self.__country
-    
+
     @country.setter
     def country(self, country: str) -> None:
         """
@@ -57,7 +60,7 @@ class Address(object):
         :rtype: str
         """
         return self.__department
-    
+
     @department.setter
     def department(self, department: str) -> None:
         """
@@ -75,7 +78,7 @@ class Address(object):
         :rtype: str
         """
         return self.__city
-    
+
     @city.setter
     def city(self, city: str) -> None:
         """
@@ -102,7 +105,7 @@ class Address(object):
         :type post_code: str
         """
         self.__post_code = post_code
-    
+
     @property
     def neighborhood(self) -> str:
         """
@@ -111,7 +114,7 @@ class Address(object):
         :rtype: str
         """
         return self.__neighborhood
-    
+
     @neighborhood.setter
     def neighborhood(self, neighborhood: str) -> None:
         """
@@ -129,7 +132,7 @@ class Address(object):
         :rtype: str
         """
         return self.__street
-    
+
     @street.setter
     def street(self, street: str) -> None:
         """
@@ -138,7 +141,7 @@ class Address(object):
         :type street: str
         """
         self.__street = street
-    
+
     @property
     def complement(self) -> str:
         """
@@ -147,7 +150,7 @@ class Address(object):
         :rtype: str
         """
         return self.__complement
-    
+
     @complement.setter
     def complement(self, complement: str) -> None:
         """
@@ -164,7 +167,7 @@ class Address(object):
         :rtype: str
         """
         return f'Country: {self.country}, Department: {self.department}, City: {self.city}, Post code: {self.post_code}, Neighborhood: {self.neighborhood}, Street: {self.street}, Complement: {self.complement} '
-    
+
     def __eq__(self, other: object) -> bool:
         """
         Method that returns if the object is equal to another object

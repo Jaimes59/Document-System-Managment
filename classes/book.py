@@ -1,24 +1,27 @@
+from typing import Dict, Any
+
 from classes.fdoc import Fdoc
 
+
 class Book(Fdoc):
-    def __init__(self, id: int = '0', author: str = 'author',
-                title: str = 'title', price: float = 0.1,
-                topic: str = 'topic', language: str = 'esp',
-                publisher: str = 'publisher', editor: str = 'edithor',
-                pages: int = '1', synopsis: str = 'synopsis',
-                presentation: str = 'presentation') -> object:
+    def __init__(self, id_doc: int = '0', author: str = 'author',
+                 title: str = 'title', price: float = 0.1,
+                 topic: str = 'topic', language: str = 'esp',
+                 publisher: str = 'publisher', editor: str = 'edithor',
+                 pages: int = '1', synopsis: str = 'synopsis',
+                 presentation: str = 'presentation') -> object:
         """
         Constructor of the class
-        :param id: the id of the book
-        :type id: int
+        :param id_doc: the id of the book
+        :type id_doc: int
         :param author: the author of the book
         :type author: str
         :param title: the title of the book
         :type title: str
         :param price: the price of the book
         :type price: float
-        :param topi: the topic of the book
-        :type topi: str
+        :param topic: the topic of the book
+        :type topic: str
         :param language: the language of the book
         :type language: str
         :param publisher: the publisher of the book
@@ -32,7 +35,7 @@ class Book(Fdoc):
         :param presentation: the presentation of the book
         :type presentation: str
         """
-        super().__init__(id, author, title, price, topic, language, publisher)
+        super().__init__(id_doc, author, title, price, topic, language, publisher)
         self.__editor = editor
         self.__pages = pages
         self.__synopsis = synopsis
@@ -46,7 +49,7 @@ class Book(Fdoc):
         :rtype: str
         """
         return self.__editor
-    
+
     @editor.setter
     def editor(self, editor: str) -> None:
         """
@@ -64,7 +67,7 @@ class Book(Fdoc):
         :rtype: int
         """
         return self.__pages
-    
+
     @pages.setter
     def pages(self, pages: int) -> None:
         """
@@ -82,7 +85,7 @@ class Book(Fdoc):
         :rtype: str
         """
         return self.__synopsis
-    
+
     @synopsis.setter
     def synopsis(self, synopsis: str) -> None:
         """
@@ -100,7 +103,7 @@ class Book(Fdoc):
         :rtype: str
         """
         return self.__presentation
-    
+
     @presentation.setter
     def presentation(self, presentation: str) -> None:
         """
@@ -110,15 +113,25 @@ class Book(Fdoc):
         """
         self.__presentation = presentation
 
-    def __str__(self) -> str:
+    def __str__(self) -> dict[str | Any, int | str | float | Any]:
         """
         Method to print the book
         :return: the book
         :rtype: str
         """
-        return super().__str__() + f'Editor: {self.editor}, Pages: {self.pages}, Synopsis: {self.synopsis}, Presentation: {self.presentation}'
-    
-    def __eq__ (self, other: object) -> bool:
+        return {"ID": self.id_doc,
+                "Author": self.author,
+                "Title": self.title,
+                "Price": self.price,
+                "Topic": self.topic,
+                "Language": self.language,
+                "Publisher": self.publisher,
+                "Editor": self.editor,
+                "Pages": self.pages,
+                "Synopsis": self.synopsis,
+                "Presentation": self.presentation}
+
+    def __eq__(self, other: object) -> bool:
         """
         Method that returns True if the object is equal to other
         :param other: the other object
@@ -127,5 +140,6 @@ class Book(Fdoc):
         :rtype: bool
         """
         if isinstance(other, Book):
-            return super().__eq__(other) and self.editor == other.editor and self.pages == other.pages and self.synopsis == other.synopsis and self.presentation == other.presentation
+            return super().__eq__(
+                other) and self.editor == other.editor and self.pages == other.pages and self.synopsis == other.synopsis and self.presentation == other.presentation
         return False

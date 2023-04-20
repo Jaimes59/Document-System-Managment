@@ -1,18 +1,22 @@
+from typing import Dict, Any
+
 from classes.edoc import Edoc
+
 
 class InvBook(Edoc):
     """
     A class that represents an inventory book
     """
-    def __init__(self, id: int = 0, author: str = 'author',
-                title: str = 'title', price: float = 0.1,
-                topic: str = 'topic', language: str = 'esp',
-                pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
-                pages: int = 1, abstract: str = 'abstract') -> object:
+
+    def __init__(self, id_doc: int = 0, author: str = 'author',
+                 title: str = 'title', price: float = 0.1,
+                 topic: str = 'topic', language: str = 'esp',
+                 pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
+                 pages: int = 1, abstract: str = 'abstract') -> object:
         """
         Constructor of the class
-        :param id: the id of the InvBook
-        :type id: int
+        :param id_doc: the id of the InvBook
+        :type id_doc: int
         :param author: the author of the InvBook
         :type author: str
         :param title: the title of the InvBook
@@ -34,10 +38,10 @@ class InvBook(Edoc):
         :param abstract: the abstract of the InvBook
         :type abstract: str
         """
-        super().__init__(id, author, title, price, topic, language, pub_date, size, doi, pages, abstract)
+        super().__init__(id_doc, author, title, price, topic, language, pub_date, size, doi, pages, abstract)
         self.__pages = pages
         self.__abstract = abstract
-    
+
     @property
     def pages(self) -> int:
         """
@@ -46,7 +50,7 @@ class InvBook(Edoc):
         :rtype: int
         """
         return self.__pages
-    
+
     @pages.setter
     def pages(self, pages: int) -> None:
         """
@@ -64,7 +68,7 @@ class InvBook(Edoc):
         :rtype: str
         """
         return self.__abstract
-    
+
     @abstract.setter
     def abstract(self, abstract: str) -> None:
         """
@@ -74,14 +78,25 @@ class InvBook(Edoc):
         """
         self.__abstract = abstract
 
-    def __str__(self) -> str:
+    def __str__(self) -> dict[str | Any, int | str | float | Any]:
         """
         Method that represents the object as a string
         :return: the string representation of the object
         :rtype: str
         """
-        return f'InvBook: {self.id}, {self.author}, {self.title}, {self.price}, {self.topic}, {self.language}, {self.pub_date}, {self.size}, {self.doi}, {self.pages}, {self.abstract}'
-    
+        return {"id": self.id_doc,
+                "Author": self.author,
+                "Title": self.title,
+                "Price": self.price,
+                "Topic": self.topic,
+                "Language": self.language,
+                "Publication Date": self.pub_date,
+                "Size": self.size,
+                "DOI": self.doi,
+                "Pages": self.pages,
+                "Abstract": self.abstract
+                }
+
     def __eq__(self, other: object) -> bool:
         """
         Method that compares two objects

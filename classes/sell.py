@@ -134,5 +134,5 @@ class Sell(object):
         :return: the string representation of the class
         :rtype: str
         """
-        return (f'Sell: {self.__sell_id}, {self.__date}, '
-                f'{self.__pay_method}, {self.__total_price}, {self.__items}')
+        return {"Sell": self.sell_id, "Date": self.date, "Payment Method": self.pay_method,
+                "Total Price": self.total_price, "Items": self.items}

@@ -1,12 +1,14 @@
 from classes.document import Document
 
+
 class Lease(object):
     """
     A class that represents a lease
     """
+
     def __init__(self, lease_id: int = 0, start_date: str = 'start_date',
-                finish_date: str = 'finish_date', pay_method: str = 'pay_method',
-                total_price: float = 0.1, items: list = [Document()]) -> object:
+                 finish_date: str = 'finish_date', pay_method: str = 'pay_method',
+                 total_price: float = 0.1, items: list = [Document()]) -> object:
         """
         Constructor of the class
         :param lease_id: the id of the lease
@@ -37,7 +39,7 @@ class Lease(object):
         :rtype: int
         """
         return self.__lease_id
-    
+
     @lease_id.setter
     def lease_id(self, lease_id: int) -> None:
         """
@@ -55,7 +57,7 @@ class Lease(object):
         :rtype: str
         """
         return self.__start_date
-    
+
     @start_date.setter
     def start_date(self, start_date: str) -> None:
         """
@@ -73,7 +75,7 @@ class Lease(object):
         :rtype: str
         """
         return self.__finish_date
-    
+
     @finish_date.setter
     def finish_date(self, finish_date: str) -> None:
         """
@@ -91,7 +93,7 @@ class Lease(object):
         :rtype: str
         """
         return self.__pay_method
-    
+
     @pay_method.setter
     def pay_method(self, pay_method: str) -> None:
         """
@@ -109,7 +111,7 @@ class Lease(object):
         :rtype: float
         """
         return self.__total_price
-    
+
     @total_price.setter
     def total_price(self, total_price: float) -> None:
         """
@@ -127,7 +129,7 @@ class Lease(object):
         :rtype: list
         """
         return self.__items
-    
+
     @items.setter
     def items(self, items: list) -> None:
         """
@@ -155,10 +157,15 @@ class Lease(object):
         :return: the string
         :rtype: str
         """
-        return (f'Lease: {self.__lease_id}, {self.__start_date}, '
-                f'{self.__finish_date}, {self.__pay_method}, '
-                f'{self.__total_price}, {self.__items}')
-    
+        return {
+            "Lease ID": self.lease_id,
+            "Start Date": self.start_date,
+            "Finish Date": self.finish_date,
+            "Payment Method": self.pay_method,
+            "Total Price": self.total_price,
+            "Items": self.items
+        }
+
     def __eq__(self, other: object) -> bool:
         """
         Checks if two objects are equal

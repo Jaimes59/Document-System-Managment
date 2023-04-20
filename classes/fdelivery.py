@@ -97,8 +97,12 @@ class FDelivery(Delivery):
         :return: the string representation of a delivery
         :rtype: str
         """
-        return (f'FDelivery: {self.deliver_id}, {self.date}, {self.buyer}, '
-        f'{self.address}, {self.contact}, {self.company}')
+        return {"ID": self.deliver_id,
+                "Date": self.date,
+                "Buyer": self.buyer,
+                "Address": self.address,
+                "Contact": self.contact,
+                "Company": self.company}
 
     def __eq__(self, other: object) -> bool:
         """

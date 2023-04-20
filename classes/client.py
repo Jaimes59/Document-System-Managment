@@ -1,17 +1,18 @@
 from classes.person import Person
 
+
 class Client(Person):
     """
     Class that represents a client
     """
     
-    def __init__(self, id: int = 0, name: str = 'name', 
-                last_name: str = 'last_name', phone: str = 'phone',
-                mail: str = 'mail') -> object:
+    def __init__(self, id_person: int = 0, name: str = 'name',
+                 last_name: str = 'last_name', phone: str = 'phone',
+                 mail: str = 'mail') -> object:
         """
         Constructor of the class
-        :param id: the id of the client
-        :type id: int
+        :param id_person: the id of the client
+        :type id_person: int
         :param name: the name of the client
         :type name: str
         :param last_name: the last name of the client
@@ -21,7 +22,7 @@ class Client(Person):
         :param mail: the mail of the client
         :type mail: str
         """
-        super().__init__(id, name, last_name, phone, mail)
+        super().__init__(id_person, name, last_name, phone, mail)
 
     def buyHistory(self) -> list:
         """
@@ -45,9 +46,11 @@ class Client(Person):
         :return: the string representation of the object
         :rtype: str
         """
-        return (f'***Printing Client {self.id} ***'
-                f'\nClient ID: {self.id} \nClient name: {self.name} \nClient last name: {self.last_name}' 
-                f'\nClient phone: {self.phone} \nClient mail: {self.mail}\n')
+        return {"ID": self.id_person,
+                "Name": self.name,
+                "Last Name": self.last_name,
+                "Phone": self.phone,
+                "Email": self.mail}
 
     def __eq__(self, other: object) -> bool:
         """

@@ -52,9 +52,10 @@ class EDelivery(Delivery):
         :return: the string representation of the object
         :rtype: str
         """
-        return (f'Delivery id: {self.deliver_id}, date: {self.date}, '
-                f'email: {self.deliverMail}')
-    
+        return {"ID": self.deliver_id,
+                "Date": self.date,
+                "Email": self.deliverMail}
+
     def __eq__(self, other: object) -> bool:
         """
         Method that compares two objects

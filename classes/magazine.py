@@ -4,15 +4,15 @@ class Magazine(Edoc):
     """
     A class that represents a magazine
     """
-    def __init__(self, id: int = 0, author: str = 'author',
-                title: str = 'title', price: float = 0.1,
-                topic: str = 'topic', language: str = 'esp',
-                pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
-                edition: int = 1, pages: int = 1) -> object:
+    def __init__(self, id_doc: int = 0, author: str = 'author',
+                 title: str = 'title', price: float = 0.1,
+                 topic: str = 'topic', language: str = 'esp',
+                 pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
+                 edition: int = 1, pages: int = 1) -> object:
         """
         Constructor of the class
-        :param id: the id of the magazine
-        :type id: int
+        :param id_doc: the id of the magazine
+        :type id_doc: int
         :param author: the author of the magazine
         :type author: str
         :param title: the title of the magazine
@@ -34,7 +34,7 @@ class Magazine(Edoc):
         :param pages: the number of pages of the magazine
         :type pages: int
         """
-        super().__init__(id, author, title, price, topic, language, pub_date, size, doi)
+        super().__init__(id_doc, author, title, price, topic, language, pub_date, size, doi)
         self.__edition = edition
         self.__pages = pages
 
@@ -80,8 +80,10 @@ class Magazine(Edoc):
         :return: the string representation of the object
         :rtype: str
         """
-        return f'{super().__str__()}, edition: {self.__edition}, pages: {self.__pages}'
-    
+        return {"id": self.id_doc, "Author": self.author, "Title": self.title, "Price": self.price, "Topic": self.topic,
+                "Language": self.language, "Publication Date": self.pub_date, "Size": self.size, "DOI": self.doi,
+                "Edition": self.edition, "Pages": self.pages}
+
     def __eq__(self, other: object) -> bool:
         """
         Method to compare two objects

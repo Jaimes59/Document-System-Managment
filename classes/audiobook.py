@@ -1,19 +1,21 @@
 from classes.edoc import Edoc
 
+
 class AudioBook(Edoc):
     """
     A class that represents an audio book
     """
-    def __init__(self, id: int = 0, author: str = 'author',
-                title: str = 'title', price: float = 0.1,
-                topic: str = 'topic', language: str = 'esp',
-                pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
-                hours: int = 1, minutes: int = 1, seconds: int = 1, 
-                synopsis: str = 'synopsis') -> object:
+
+    def __init__(self, id_doc: int = 0, author: str = 'author',
+                 title: str = 'title', price: float = 0.1,
+                 topic: str = 'topic', language: str = 'esp',
+                 pub_date: str = 'pub_date', size: float = 0.1, doi: str = 'doi',
+                 hours: int = 1, minutes: int = 1, seconds: int = 1,
+                 synopsis: str = 'synopsis') -> object:
         """
         Constructor of the class
-        :param id: the id of the audio book
-        :type id: int
+        :param id_doc: the id of the audio book
+        :type id_doc: int
         :param author: the author of the audio book
         :type author: str
         :param title: the title of the audio book
@@ -39,7 +41,7 @@ class AudioBook(Edoc):
         :param synopsis: the synopsis of the audio book
         :type synopsis: str
         """
-        super().__init__(id, author, title, price, topic, language, pub_date, size, doi)
+        super().__init__(id_doc, author, title, price, topic, language, pub_date, size, doi)
         self.__hours = hours
         self.__minutes = minutes
         self.__seconds = seconds
@@ -53,7 +55,7 @@ class AudioBook(Edoc):
         :rtype: int
         """
         return self.__hours
-    
+
     @hours.setter
     def hours(self, hours: int) -> None:
         """
@@ -71,7 +73,7 @@ class AudioBook(Edoc):
         :rtype: int
         """
         return self.__minutes
-    
+
     @minutes.setter
     def minutes(self, minutes: int) -> None:
         """
@@ -89,7 +91,7 @@ class AudioBook(Edoc):
         :rtype: int
         """
         return self.__seconds
-    
+
     @seconds.setter
     def seconds(self, seconds: int) -> None:
         """
@@ -107,7 +109,7 @@ class AudioBook(Edoc):
         :rtype: str
         """
         return self.__synopsis
-    
+
     @synopsis.setter
     def synopsis(self, synopsis: str) -> None:
         """
@@ -123,8 +125,19 @@ class AudioBook(Edoc):
         :return: the string representation of the class
         :rtype: str
         """
-        return f'AudioBook: {self.id}, {self.author}, {self.title}, {self.price}, {self.topic}, {self.language}, {self.pub_date}, {self.size}, {self.doi}, {self.hours}, {self.minutes}, {self.seconds}, {self.synopsis}'
-    
+        return {"ID": self.id_doc,
+                "Author": self.author,
+                "Title": self.title,
+                "Price": self.price,
+                "Topic": self.topic,
+                "Language": self.language,
+                "Publication Date": self.pub_date,
+                "Size": self.size,
+                "DOI": self.doi,
+                "Duration": f"{self.hours}h {self.minutes}m {self.seconds}s",
+                "Synopsis": self.synopsis}
+
+
     def __eq__(self, other: object) -> bool:
         """
         Equality operator
