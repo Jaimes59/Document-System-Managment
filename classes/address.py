@@ -166,7 +166,13 @@ class Address(object):
         :return: the string representation of the object
         :rtype: str
         """
-        return f'Country: {self.country}, Department: {self.department}, City: {self.city}, Post code: {self.post_code}, Neighborhood: {self.neighborhood}, Street: {self.street}, Complement: {self.complement} '
+        return {"country": self.country,
+                "department": self.department,
+                "city": self.city,
+                "post_code": self.post_code,
+                "neighborhood": self.neighborhood,
+                "street": self.street,
+                "complement": self.complement}
 
     def __eq__(self, other: object) -> bool:
         """
