@@ -3,43 +3,56 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 import os
 
-from classes.address import Address
-from classes.administrator import Administrator
-from classes.audiobook import AudioBook
-from classes.book import Book
-from classes.client import Client
-from classes.delivery import Delivery
-from classes.dms import DMS
-from classes.document import Document
-from classes.ebook import Ebook
-from classes.edelivery import EDelivery
-from classes.edoc import Edoc
-from classes.fdelivery import FDelivery
-from classes.fdoc import Fdoc
-from classes.invbook import InvBook
-from classes.lease import Lease
-from classes.magazine import Magazine
-from classes.person import Person
-from classes.sell import Sell
+from pydantic import BaseModel, validator
+from enum import Enum
+from typing import Optional
+from fastapi import Query
+from fastapi.openapi.models import Schema
+from fastapi import FastAPI
+from fastapi.params import Depends
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import HTTPException
+from fastapi.responses import HTMLResponse
+from fastapi.openapi.utils import get_openapi
+from fastapi import Request
+from fastapi.templating import Jinja2Templates
 
-from classes.address_controller import AddressController
-from classes.administrator_controller import AdministratorController
-from classes.audiobook_controller import AudioBookController
-from classes.book_controller import BookController
-from classes.client_controller import ClientController
-from classes.delivery_controller import DeliveryController
-from classes.document_controller import DocumentController
-from classes.ebook_controller import EBookController
-from classes.edelivery_controller import EdeliveryController
-from classes.edoc_controller import EdocController
-from classes.fdelivery_controller import FdeliveryController
-from classes.fdoc_controller import FdocController
-from classes.invbook_controller import InvbookController
-from classes.lease_controller import LeaseController
-from classes.magazine_controller import MagazineController
-from classes.person_controller import PersonController
-from classes.sell_controller import SellController
+from logic.classes.address import Address
+from logic.classes.administrator import Administrator
+from logic.classes.audiobook import AudioBook
+from logic.classes.book import Book
+from logic.classes.client import Client
+from logic.classes.delivery import Delivery
+from logic.classes.dms import DMS
+from logic.classes.document import Document
+from logic.classes.ebook import Ebook
+from logic.classes.edelivery import EDelivery
+from logic.classes.edoc import Edoc
+from logic.classes.fdelivery import FDelivery
+from logic.classes.fdoc import Fdoc
+from logic.classes.invbook import InvBook
+from logic.classes.lease import Lease
+from logic.classes.magazine import Magazine
+from logic.classes.person import Person
+from logic.classes.sell import Sell
 
+from logic.controllers.address_controller import AddressController
+from logic.controllers.administrator_controller import AdministratorController
+from logic.controllers.audiobook_controller import AudioBookController
+from logic.controllers.book_controller import BookController
+from logic.controllers.client_controller import ClientController
+from logic.controllers.delivery_controller import DeliveryController
+from logic.controllers.document_controller import DocumentController
+from logic.controllers.ebook_controller import EBookController
+from logic.controllers.edelivery_controller import EdeliveryController
+from logic.controllers.edoc_controller import EdocController
+from logic.controllers.fdelivery_controller import FdeliveryController
+from logic.controllers.fdoc_controller import FdocController
+from logic.controllers.invbook_controller import InvbookController
+from logic.controllers.lease_controller import LeaseController
+from logic.controllers.magazine_controller import MagazineController
+from logic.controllers.person_controller import PersonController
+from logic.controllers.sell_controller import SellController
 
 app = FastAPI()
 address_object = AddressController()
@@ -59,7 +72,6 @@ lease_object = LeaseController()
 magazine_object = MagazineController()
 person_object = PersonController()
 sell_object = SellController()
-
 
 origins = ["*"]
 
@@ -119,7 +131,8 @@ async def root():
 
 
 @app.post("/api/book")
-async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, publisher: str, editor: str,
+async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, publisher: str,
+              editor: str,
               pages: int, synopsis: str, presentation: str):
     return book_object.add(Book(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
                                 language=language, publisher=publisher, editor=editor, pages=pages, synopsis=synopsis,
@@ -166,7 +179,7 @@ async def root():
 async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pub_date: str,
               size: float, doi: str, editor: str, pages: int, synopsis: str):
     return ebook_object.add(Ebook(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
-                                  language=language,pub_date=pub_date, size=size, doi=doi, editor=editor,
+                                  language=language, pub_date=pub_date, size=size, doi=doi, editor=editor,
                                   pages=pages, synopsis=synopsis))
 
 
@@ -189,7 +202,7 @@ async def root():
 async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pub_date: str,
               size: float, doi: str):
     return edoc_object.add(Edoc(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
-                                language=language,pub_date=pub_date, size=size, doi=doi))
+                                language=language, pub_date=pub_date, size=size, doi=doi))
 
 
 @app.get("/api/fdelivery")
@@ -231,7 +244,7 @@ async def root():
 
 
 @app.post("/api/lease")
-async def add(lease_id: int, start_date: str, finish_date: str, pay_method: str,total_price: float, items: list):
+async def add(lease_id: int, start_date: str, finish_date: str, pay_method: str, total_price: float, items: list):
     return lease_object.add(Lease(lease_id=lease_id, start_date=start_date, finish_date=finish_date,
                                   pay_method=pay_method, total_price=total_price, items=items))
 
@@ -245,7 +258,7 @@ async def root():
 async def add(id_doc: int, author: str, title: str, price: float, topic: str, language: str, pub_date: str,
               size: float, doi: str, edition: int, pages: int):
     return magazine_object.add(Magazine(id_doc=id_doc, author=author, title=title, price=price, topic=topic,
-                                        language=language,pub_date=pub_date, size=size, doi=doi, edition=edition,
+                                        language=language, pub_date=pub_date, size=size, doi=doi, edition=edition,
                                         pages=pages))
 
 
@@ -266,7 +279,11 @@ async def root():
 
 @app.post("/api/sell")
 async def add(sell_id: int, date: str, pay_method: str, total_price: float, items: list):
-    return sell_object.add(Sell(sell_id=sell_id, date=date, pay_method=pay_method, total_price=total_price, items=items))
+    return sell_object.add(
+        Sell(sell_id=sell_id, date=date, pay_method=pay_method, total_price=total_price, items=items))
+
+
+
 
 if __name__ == "__main__":
     uvicorn.run(app, port=33508)
